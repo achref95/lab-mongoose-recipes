@@ -37,7 +37,9 @@ mongoose
     return Recipe.insertMany(data) //return used to make the chain wait for the insertmany to complete
   })
   .then(addedRecipes => {
-    console.log(addedRecipes.title)
+    addedRecipes.forEach(recipe => {
+      console.log(recipe.title)
+    })
 
     // Iteration 4 - Update recipe
     return Recipe.findOneAndUpdate(
