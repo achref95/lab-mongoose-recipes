@@ -20,7 +20,7 @@ mongoose
     const newRecipe = {
       title: 'Spaghetti with tomato sauce',
       level: 'Easy Peasy',
-      ingredients: ['Pasta', 'Tomatos', 'Basilic', 'Olive oil', "Salt"],
+      ingredients: ['Pasta', 'Tomatos', 'Basilic', 'Onions', 'Garlic', 'Olive oil', "Salt"],
       cuisine: 'Italian',
       dishType: 'main_course',
       duration: 15,
@@ -30,13 +30,14 @@ mongoose
     return Recipe.create(newRecipe);
   })
   .then(createdRecipe => {
-    console.log(`Created recipe: ${createdRecipe.title}`)
+    console.log(`${createdRecipe.title} Recipe created`)
+    
 
     // Iteration 3 - Insert multiple recipes
-    return Recipe.insertMany(data)
+    return Recipe.insertMany(data) //return used to make the chain wait for the insertmany to complete
   })
   .then(addedRecipes => {
-    console.log(`Added ${addedRecipes.length} recipes from data.json`)
+    console.log(addedRecipes.title)
 
     // Iteration 4 - Update recipe
     return Recipe.findOneAndUpdate(
@@ -52,7 +53,7 @@ mongoose
     return Recipe.deleteOne({ title: 'Carrot Cake' })
   })
   .then(deletedRecipe => {
-    console.log(`Deleted recipe: ${deletedRecipe.deletedCount} document(s) deleted`)
+    console.log(`${deletedRecipe.title} was deleted`)
 
     // Close the database connection
     mongoose.connection.close();
